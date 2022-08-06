@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="upload.css">
+    
+</head>
+<body>
+    <div>
+      <h2>Please enter the nessary details with photos</h2>
+    </div>
+    <div class="flint">
+        <div class="prim">
+    <form action="/formPost" method="post" enctype="multipart/form-data">
+       
+        <label for="fname">First name:</label>
+        <br>
+        <input type="text" id="fname" name="fname" value="">
+        <br>
+        <br>
+        <label for="lname">Last name:</label>
+        <br>
+        <input type="text" id="lname" name="lname" value="">
+        <br>
+        <br>
+        <label for="phone">Phone Number:</label>
+        <br>
+        <input type="number" id="phone" name="phone" value="">
+        <br>
+        <br>
+        <label for="adress">Address:</label>
+        <br>
+        <input type="text" id="adress" name="adress" value="">
+        <br>
+        <br>
+        <label for="itemN">Item Name:</label>
+        <br>
+        <input type="text" id="adress" name="itemN" value="">
+        <br>
+        <br>
+        <label for="picture">picture</label>
+        <br>
+        <div class="contex">
+            <input type="file" name="file" id="flm"  hidden="true">
+        </div>  
+        <input type="button" value="upload" id="li">  
+        <br>
+        <br>
+        <input type="submit" onsubmit="test()" value="Submit" >
+        
+    </form>
+</div>
+</div>
+<script>
+    const y = document.getElementById("flm")
+    const x = document.getElementById("li")
+
+    const ip=document.querySelectorAll('input')
+
+    x.addEventListener('click',()=>{
+        y.click()
+    })
+
+    function test(e){
+        e.preventDefault()
+        console.log(e)
+        let data={
+            first:ip[0],
+            last:ip[1],
+            phone:ip[2],
+            addr:ip[3],
+            item:ip[4],
+            picName:ip[5]
+        }
+        document.cookie(`${data.first} ${data.last}`,data)
+
+    }
+
+
+
+</script>
+</body>
+</html> 

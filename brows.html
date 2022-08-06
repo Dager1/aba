@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="brows.css">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .photo{
+    width: 500px;
+    height: 500px;
+    margin-left: 500px;
+}
+    table{
+        margin-left: 680px;
+        border: 1px solid black;
+    }
+    </style>
+</head>
+<body>
+    <center>
+        <form action="/browse" method="get">
+            Item Name: <input type="text" name="itemName">
+            <input type="button"  value="Get Data">
+        </form>
+
+        
+    </center>
+    <script>
+        const ip=document.querySelectorAll('input')
+        ip[1].addEventListener('click',(e)=>{
+            let xhr=new XMLHttpRequest()
+            xhr.open('post','/browseData',true)
+            xhr.setRequestHeader('Content-type','application/json')
+            
+            xhr.send(JSON.stringify({itm:ip[0].value}))
+            xhr.onload=()=>{
+                console.log(JSON.parse(xhr.response))
+                let table=document.createElement('table')
+                table.innerHTML=`
+                <tr>
+            <th>Name</th><th>Address</th><th>Phone</th>
+        </tr>
+        <tr>
+            <td>${JSON.parse(xhr.response).data.fname} ${JSON.parse(xhr.response).data.lname}</td>
+            <td>${JSON.parse(xhr.response).data.adress}</td>
+            <td>${JSON.parse(xhr.response).data.phone}</td>
+        </tr>
+                `
+                document.body.appendChild(table)
+                let img=document.createElement('img')
+                img.setAttribute('src','http://localhost:6969/imgData?filename='+JSON.parse(xhr.response).data.filename)
+                img.setAttribute('class','photo')
+                document.body.appendChild(img)
+            }
+        })
+    </script>
+</body>
+</html>
